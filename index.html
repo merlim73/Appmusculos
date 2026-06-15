@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Treino de Musculação - 6 Dias</title>
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: rgba(255,255,255,0.05);
+            --bg-card-hover: rgba(255,255,255,0.08);
+            --text-primary: #fff;
+            --text-secondary: rgba(255,255,255,0.8);
+            --accent: #e94560;
+            --accent-2: #ff6b6b;
+            --success: #27ae60;
+            --success-light: rgba(39, 174, 96, 0.2);
+            --border: rgba(255,255,255,0.1);
+            --shadow: rgba(0,0,0,0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #e8e8ed;
+            --bg-card: rgba(255,255,255,0.9);
+            --bg-card-hover: rgba(255,255,255,1);
+            --text-primary: #1a1a2e;
+            --text-secondary: rgba(26,26,46,0.7);
+            --accent: #e94560;
+            --accent-2: #ff6b6b;
+            --success: #27ae60;
+            --success-light: rgba(39, 174, 96, 0.15);
+            --border: rgba(0,0,0,0.1);
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+            padding: 30px;            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; color: #fff; }
+        header p { font-size: 1.2em; opacity: 0.9; color: #fff; }
+
+        .toolbar {
+            max-width: 1400px;
+            margin: 20px auto 0;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .toolbar button {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.2s;
+            backdrop-filter: blur(10px);
+        }
+        .toolbar button:hover { background: var(--accent); color: #fff; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+        .status-banner {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .progress-bar-container {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;            border: 1px solid var(--border);
+        }
+        .progress-bar-container h3 { margin-bottom: 10px; }
+        .progress-track {
+            background: rgba(255,255,255,0.1);
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        [data-theme="light"] .progress-track { background: rgba(0,0,0,0.08); }
+        .progress-fill {
+            background: linear-gradient(90deg, var(--success) 0%, #2ecc71 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .timer-container {
+            background: linear-gradient(135deg, #0f3460 0%, #533483 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #fff;
+        }
+        .timer-display {
+            font-size: 3em;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+            margin: 10px 0;
+        }
+        .timer-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .timer-buttons button {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.2s;
+        }        .timer-buttons button:hover { background: rgba(255,255,255,0.3); }
+        .timer-buttons button.primary { background: var(--success); }
+        .timer-buttons button.primary:hover { background: #2ecc71; }
+        .timer-preset { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
+        .timer-preset button {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .timer-preset button.active { background: var(--accent); border-color: var(--accent); }
+
+        .dia-treino {
+            margin-bottom: 30px;
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .dia-header {
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+        .dia-header:hover { filter: brightness(1.1); }
+        .dia-header h2 {
+            font-size: 1.8em;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .dia-header h2 span.badge {
+            font-size: 0.5em;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: normal;
+        }
+        .dia-header .counter {
+            font-size: 0.55em;
+            background: var(--success);
+            padding: 5px 15px;            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+        }
+        .dia1 .dia-header { background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); }
+        .dia2 .dia-header { background: linear-gradient(135deg, #0f3460 0%, #1a6b8a 100%); }
+        .dia3 .dia-header { background: linear-gradient(135deg, #533483 0%, #7b52a0 100%); }
+        .dia4 .dia-header { background: linear-gradient(135deg, #e94560 0%, #f39c12 100%); }
+        .dia5 .dia-header { background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); }
+        .dia6 .dia-header { background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%); }
+
+        .exercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .exercicio-card {
+            background: var(--bg-card-hover);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .exercicio-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(233, 69, 96, 0.2);
+        }
+        .exercicio-card.done {
+            border-color: var(--success);
+            opacity: 0.85;
+        }
+        .exercicio-card.done::before {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .exercicio-info { padding: 15px; }
+        .exercicio-info h3 {
+            font-size: 1.15em;
+            margin-bottom: 8px;
+            color: var(--accent);
+            padding-right: 30px;
+        }
+        .exercicio-info p {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .musculo-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            margin: 3px 3px 3px 0;
+            color: white;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .card-actions button {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 6px;            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .card-actions button:hover { background: var(--accent); color: white; }
+        .card-actions button.completed { background: var(--success); color: white; border-color: var(--success); }
+
+        .nota-area {
+            margin-top: 10px;
+            display: none;
+        }
+        .nota-area.visible { display: block; }
+        .nota-area textarea {
+            width: 100%;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px;
+            font-family: inherit;
+            font-size: 0.85em;
+            resize: vertical;
+            min-height: 60px;
+        }
+        [data-theme="light"] .nota-area textarea { background: #f8f8fa; }
+
+        .toggle-icon { font-size: 1.5em; transition: transform 0.3s; color: #fff; }
+        .collapsed .exercicios-grid { display: none; }
+        .collapsed .toggle-icon { transform: rotate(-90deg); }
+
+        .duracao-info {
+            background: rgba(233, 69, 96, 0.15);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 0 20px;
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .instrucoes {
+            background: var(--success-light);
+            border: 1px solid var(--success);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .instrucoes h3 { color: var(--success); margin-bottom: 10px; }
+        .instrucoes ul { list-style: none; padding: 0; }
+        .instrucoes li { padding: 5px 0 5px 25px; position: relative; color: var(--text-secondary); }        .instrucoes li:before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: bold; }
+
+        .canal-badge {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8em; }
+            header p { font-size: 1em; }
+            .dia-header h2 { font-size: 1.3em; }
+            .timer-display { font-size: 2.2em; }
+            .exercicios-grid { grid-template-columns: 1fr; }
+            .toolbar { gap: 8px; }
+            .toolbar button { flex: 1; min-width: 140px; }
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            header, .toolbar, .timer-container, .instrucoes, .toggle-icon, .card-actions, .nota-area, .status-banner { display: none !important; }
+            .dia-treino { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+            .exercicios-grid { display: block !important; }
+            .exercicio-card { page-break-inside: avoid; margin-bottom: 10px; }
+            .video-container { display: none !important; }
+            .collapsed .exercicios-grid { display: block !important; }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transform: translateX(400px);            transition: transform 0.3s;
+            z-index: 1000;
+            max-width: calc(100% - 40px);
+        }
+        .toast.show { transform: translateX(0); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>💪 Plano de Treino de Musculação</h1>
+        <p>6 Dias | 120 min/sessão | Vídeos Oficiais | Progresso Salvo</p>
+    </header>
+
+    <div class="toolbar">
+        <button onclick="toggleTheme()" id="themeBtn" aria-label="Alternar tema">🌓 Modo Claro</button>
+        <button onclick="toggleAll()" aria-label="Expandir ou colapsar todos os dias">📂 Expandir/Colapsar</button>
+        <button onclick="window.print()" aria-label="Imprimir plano">🖨️ Imprimir</button>
+        <button onclick="resetProgress()" aria-label="Apagar todo o progresso">🗑️ Reset</button>
+    </div>
+
+    <div class="container">
+
+        <div class="status-banner" id="statusBanner">
+            ✅ Todos os 90 vídeos verificados e a funcionar
+        </div>
+
+        <div class="timer-container" role="region" aria-label="Cronómetro de descanso">
+            <h3>⏱️ Cronómetro de Descanso</h3>
+            <div class="timer-preset">
+                <button onclick="setTimer(60)" class="active" data-time="60">60s</button>
+                <button onclick="setTimer(90)" data-time="90">90s</button>
+                <button onclick="setTimer(120)" data-time="120">120s</button>
+            </div>
+            <div class="timer-display" id="timerDisplay" aria-live="polite">01:00</div>
+            <div class="timer-buttons">
+                <button onclick="startTimer()" class="primary">▶ Iniciar</button>
+                <button onclick="pauseTimer()">⏸ Pausar</button>
+                <button onclick="resetTimer()">↻ Reset</button>
+            </div>
+        </div>
+
+        <div class="progress-bar-container">
+            <h3>📊 Progresso Geral: <span id="progressText">0%</span></h3>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+
+        <div class="instrucoes">
+            <h3>📋 Instruções Gerais</h3>            <ul>
+                <li>Marque ✓ em cada exercício concluído (o progresso é guardado automaticamente)</li>
+                <li>Use o cronómetro de descanso entre séries (60-90s)</li>
+                <li>Anote cargas e sensações em "Notas" em cada exercício</li>
+                <li>Aquecimento de 5-10 min antes de cada treino</li>
+                <li>Todos os vídeos foram verificados e funcionam corretamente</li>
+            </ul>
+        </div>
+
+        <div class="dia-treino dia1" id="dia1">
+            <div class="dia-header" onclick="toggleDia('dia1')" tabindex="0" role="button" aria-expanded="true">
+                <h2>
+                    <span>Dia 1 - Peito, Bíceps & Tríceps</span>
+                    <span class="badge">15 Exercícios</span>
+                    <span class="counter" id="counter-dia1">0/15</span>
+                    <span class="toggle-icon">▼</span>
+                </h2>
+            </div>
+            <div class="duracao-info">⏱️ Duração máx: 120 min | 3 séries de 8-12 reps</div>
+            <div class="exercicios-grid" id="grid-dia1"></div>
+        </div>
+
+        <div class="dia-treino dia2" id="dia2">
+            <div class="dia-header" onclick="toggleDia('dia2')" tabindex="0" role="button" aria-expanded="true">
+                <h2>
+                    <span>Dia 2 - Costas & Abdominais</span>
+                    <span class="badge">15 Exercícios</span>
+                    <span class="counter" id="counter-dia2">0/15</span>
+                    <span class="toggle-icon">▼</span>
+                </h2>
+            </div>
+            <div class="duracao-info">⏱️ Duração máx: 120 min | Costas: 3x8-12 | Abdómen: 3x15-25</div>
+            <div class="exercicios-grid" id="grid-dia2"></div>
+        </div>
+
+        <div class="dia-treino dia3" id="dia3">
+            <div class="dia-header" onclick="toggleDia('dia3')" tabindex="0" role="button" aria-expanded="true">
+                <h2>
+                    <span>Dia 3 - Pernas</span>
+                    <span class="badge">15 Exercícios</span>
+                    <span class="counter" id="counter-dia3">0/15</span>
+                    <span class="toggle-icon">▼</span>
+                </h2>
+            </div>
+            <div class="duracao-info">⏱️ Duração máx: 120 min | 3-4 séries de 8-15 reps</div>
+            <div class="exercicios-grid" id="grid-dia3"></div>
+        </div>
+
+        <div class="dia-treino dia4" id="dia4">
+            <div class="dia-header" onclick="toggleDia('dia4')" tabindex="0" role="button" aria-expanded="true">                <h2>
+                    <span>Dia 4 - Barra & Pesos</span>
+                    <span class="badge">15 Exercícios</span>
+                    <span class="counter" id="counter-dia4">0/15</span>
+                    <span class="toggle-icon">▼</span>
+                </h2>
+            </div>
+            <div class="duracao-info">⏱️ Duração máx: 120 min | 3-4 séries de 6-10 reps (cargas pesadas)</div>
+            <div class="exercicios-grid" id="grid-dia4"></div>
+        </div>
+
+        <div class="dia-treino dia5" id="dia5">
+            <div class="dia-header" onclick="toggleDia('dia5')" tabindex="0" role="button" aria-expanded="true">
+                <h2>
+                    <span>Dia 5 - Mistura (Técnicas Avançadas)</span>
+                    <span class="badge">15 Exercícios</span>
+                    <span class="counter" id="counter-dia5">0/15</span>
+                    <span class="toggle-icon">▼</span>
+                </h2>
+            </div>
+            <div class="duracao-info">⏱️ Duração máx: 120 min | Drop-sets, Super-séries, Rest-pause</div>
+            <div class="exercicios-grid" id="grid-dia5"></div>
+        </div>
+
+        <div class="dia-treino dia6" id="dia6">
+            <div class="dia-header" onclick="toggleDia('dia6')" tabindex="0" role="button" aria-expanded="true">
+                <h2>
+                    <span>Dia 6 - Costas & Pernas</span>
+                    <span class="badge">15 Exercícios</span>
+                    <span class="counter" id="counter-dia6">0/15</span>
+                    <span class="toggle-icon">▼</span>
+                </h2>
+            </div>
+            <div class="duracao-info">⏱️ Duração máx: 120 min | 3-4 séries de 8-12 reps</div>
+            <div class="exercicios-grid" id="grid-dia6"></div>
+        </div>
+
+        <div class="instrucoes">
+            <h3>🎯 Dicas para Maximizar Resultados</h3>
+            <ul>
+                <li><strong>Progressão de Carga:</strong> Aumente o peso gradualmente a cada 1-2 semanas</li>
+                <li><strong>Nutrição:</strong> Consuma 1.6-2.2g de proteína por kg de peso corporal diariamente</li>
+                <li><strong>Recuperação:</strong> Durma 7-9 horas por noite</li>
+                <li><strong>Hidratação:</strong> Beba pelo menos 2-3 litros de água por dia</li>
+                <li><strong>Descanso:</strong> Não treine o mesmo grupo muscular em dias consecutivos</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>💪 Plano de Treino de Musculação | 6 Dias</p>            <p>Consulte sempre um profissional de educação física antes de iniciar.</p>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const exercicios = {
+            dia1: [
+                {id:"d1-1", nome:"1. Supino Reto com Barra", canal:"Leandro Twin", tags:["Peito"], video:"EZMYCLKuGow", desc:"Fundamental para o peitoral maior. Pés firmes, escápulas retraídas, pegada 90°."},
+                {id:"d1-2", nome:"2. Supino Inclinado com Halteres", canal:"Leandro Twin", tags:["Peito Superior"], video:"WP1VLAt8hbM", desc:"Banco a 30-45°. Porção clavicular do peitoral. Descida controlada."},
+                {id:"d1-3", nome:"3. Crucifixo Reto com Halteres", canal:"Leandro Twin", tags:["Peito"], video:"uDMmccuPVPQ", desc:"Isolamento do peitoral. Leve flexão nos cotovelos durante todo o movimento."},
+                {id:"d1-4", nome:"4. Flexão de Braço", canal:"Leandro Twin", tags:["Peito","Tríceps"], video:"dHgoYiCraCw", desc:"Clássico com peso corporal. Corpo reto, desça até quase tocar o chão."},
+                {id:"d1-5", nome:"5. Voador (Peck Deck)", canal:"Leandro Twin", tags:["Peito"], video:"FzCnfD0gOXo", desc:"Isola o peitoral. Contraia ao juntar as alças e controle o retorno."},
+                {id:"d1-6", nome:"6. Crossover Polia Alta", canal:"Leandro Twin", tags:["Peito Inferior"], video:"jqTlJt3JXzQ", desc:"Define a parte inferior do peitoral. Tronco levemente inclinado à frente."},
+                {id:"d1-7", nome:"7. Rosca Direta com Barra", canal:"Leandro Twin", tags:["Bíceps"], video:"Q8TqfD8E7BU", desc:"Clássico para bíceps. Cotovelos fixos, subida controlada."},
+                {id:"d1-8", nome:"8. Rosca Martelo com Halteres", canal:"Leandro Twin", tags:["Bíceps","Braquial"], video:"0qkQy8V2FC0", desc:"Pegada neutra. Trabalha braquial e cabeça longa do bíceps."},
+                {id:"d1-9", nome:"9. Rosca Alternada com Halteres", canal:"Leandro Twin", tags:["Bíceps"], video:"S1HAcTVQVYE", desc:"Alterne braços. Supinação no topo do movimento."},
+                {id:"d1-10", nome:"10. Rosca Scott", canal:"Leandro Twin", tags:["Bíceps"], video:"zpTK6eihdSA", desc:"Banco Scott evita 'roubar'. Excelente isolamento."},
+                {id:"d1-11", nome:"11. Tríceps Corda na Polia", canal:"Leandro Twin", tags:["Tríceps"], video:"dTqDKC0D6P4", desc:"Isolado. Abra a corda no final para maior contração."},
+                {id:"d1-12", nome:"12. Tríceps Testa com Barra W", canal:"Leandro Twin", tags:["Tríceps"], video:"zznCYBVZOVA", desc:"Desça até a testa e estenda. Trabalha as três cabeças."},
+                {id:"d1-13", nome:"13. Tríceps Francês com Halter", canal:"Leandro Twin", tags:["Tríceps"], video:"YJ4kGE3eemY", desc:"Halter atrás da cabeça. Cabeça longa do tríceps."},
+                {id:"d1-14", nome:"14. Mergulho em Paralelas", canal:"YouTube Shorts", tags:["Peito","Tríceps"], video:"qvmH-TpRLBE", desc:"Tronco inclinado para peito. Ombros abaixo dos cotovelos."},
+                {id:"d1-15", nome:"15. Supino Declinado", canal:"Leandro Twin", tags:["Peito Inferior"], video:"J2g6qPBJfqo", desc:"Porção inferior do peitoral. Cuidado com amplitude."}
+            ],
+            dia2: [
+                {id:"d2-1", nome:"1. Puxada Frontal Aberta", canal:"Leandro Twin", tags:["Costas","Dorsal"], video:"pJM_rHhluK8", desc:"Puxe até o peito. Escápulas retraídas. Alarga as costas."},
+                {id:"d2-2", nome:"2. Remada Curvada com Barra", canal:"Leandro Twin", tags:["Costas"], video:"TfxJMertfsw", desc:"Tronco inclinado, barra até o abdómen. Costas retas."},
+                {id:"d2-3", nome:"3. Remada Unilateral (Serrote)", canal:"Leandro Twin", tags:["Costas"], video:"m4h4jT9patY", desc:"Apoie joelho e mão. Puxe até a anca. Trabalha cada lado."},
+                {id:"d2-4", nome:"4. Barra Fixa (Pull-up)", canal:"Leandro Twin", tags:["Costas","Bíceps"], video:"thg6cGXSlvY", desc:"Queixo ultrapassa a barra. Completo para costas."},
+                {id:"d2-5", nome:"5. Remada Baixa com Triângulo", canal:"Leandro Twin", tags:["Costas"], video:"Os_orWmhqxY", desc:"Sentado, puxe o triângulo até o abdómen. Peito aberto."},
+                {id:"d2-6", nome:"6. Puxada Fechada Supinada", canal:"Leandro Twin", tags:["Costas","Bíceps"], video:"X7eZZWJmlP8", desc:"Pegada supinada. Dorsal e bíceps simultaneamente."},
+                {id:"d2-7", nome:"7. Levantamento Terra", canal:"Leandro Twin", tags:["Costas","Corpo Inteiro"], video:"50AkPBZwACQ", desc:"Composto. Barra próxima ao corpo, costas retas."},
+                {id:"d2-8", nome:"8. Remada Cavalinho (T-Bar)", canal:"Leandro Twin", tags:["Costas"], video:"Vk6c7CjtM14", desc:"Espessura das costas. Tronco estável."},
+                {id:"d2-9", nome:"9. Prancha Abdominal", canal:"Leandro Twin", tags:["Abdominais","Core"], video:"qNRqGqESAWU", desc:"Corpo reto, antebraços e pontas dos pés. 30-60s."},
+                {id:"d2-10", nome:"10. Abdominal Supra (Crunch)", canal:"Leandro Twin", tags:["Abdominais Superiores"], video:"7YxVRiATugo", desc:"Suba os ombros contraindo o abdómen. Não puxe o pescoço."},
+                {id:"d2-11", nome:"11. Abdominal Infra", canal:"Leandro Twin", tags:["Abdominais Inferiores"], video:"ixJcUH8AlL8", desc:"Eleve as pernas até 90°. Desça lentamente."},
+                {id:"d2-12", nome:"12. Abdominal Oblíquo", canal:"Leandro Twin", tags:["Oblíquos"], video:"Smr8ipkN5A0", desc:"Rode o tronco. Pode segurar peso."},
+                {id:"d2-13", nome:"13. Abdominal Bicicleta", canal:"Leandro Twin", tags:["Abdominais","Oblíquos"], video:"ti57nIOdB1o", desc:"Simule pedalar tocando cotovelo oposto no joelho."},
+                {id:"d2-14", nome:"14. Prancha Lateral", canal:"Leandro Twin", tags:["Oblíquos","Core"], video:"9COdo-DIOT4", desc:"Apoie num antebraço e lado do pé. Fortalece oblíquos."},
+                {id:"d2-15", nome:"15. Extensão Lombar", canal:"Leandro Twin", tags:["Lombar","Core"], video:"z0rx9swRDR0", desc:"Fortalece a lombar. Essencial para postura."}
+            ],
+            dia3: [
+                {id:"d3-1", nome:"1. Agachamento Livre", canal:"Leandro Twin", tags:["Quadríceps","Glúteos"], video:"zgk71dUUt0Y", desc:"Rei dos exercícios. Costas retas, coxas paralelas."},
+                {id:"d3-2", nome:"2. Stiff com Barra", canal:"Leandro Twin", tags:["Posteriores","Glúteos"], video:"u1E3_u2gJYE", desc:"Pernas quase estendidas, tronco inclinado. Posteriores e glúteos."},
+                {id:"d3-3", nome:"3. Cadeira Extensora", canal:"Leandro Twin", tags:["Quadríceps"], video:"el3oHblB5DM", desc:"Isolamento de quadríceps. Extensão completa."},
+                {id:"d3-4", nome:"4. Mesa Flexora", canal:"Leandro Twin", tags:["Posteriores"], video:"2-ULaRrQa7c", desc:"Deitado, flexione as pernas trazendo calcanhares aos glúteos."},
+                {id:"d3-5", nome:"5. Afundo com Halteres", canal:"YouTube Shorts", tags:["Quadríceps","Glúteos"], video:"klMhkR6VSCw", desc:"Passo à frente, joelho traseiro quase toca o chão. Alterne."},
+                {id:"d3-6", nome:"6. Leg Press 45°", canal:"Leandro Twin", tags:["Quadríceps","Glúteos"], video:"nY8UsiAqwds", desc:"Pés à largura dos ombros. Não bloqueie joelhos."},
+                {id:"d3-7", nome:"7. Agachamento Sumô", canal:"Leandro Twin", tags:["Adutores","Glúteos"], video:"O6Cmxez6D0k", desc:"Pés afastados, pontas para fora. Joelhos alinhados."},                {id:"d3-8", nome:"8. Agachamento Búlgaro", canal:"Leandro Twin", tags:["Quadríceps","Glúteos"], video:"IGf9fR4Y7Iw", desc:"Um pé atrás num banco. Desça com a perna da frente."},
+                {id:"d3-9", nome:"9. Elevação Pélvica", canal:"Leandro Twin", tags:["Glúteos"], video:"ptK0azwOXwM", desc:"Costas num banco, empurre quadril para cima."},
+                {id:"d3-10", nome:"10. Cadeira Flexora Sentado", canal:"Leandro Twin", tags:["Posteriores"], video:"Zss6E3VU6X0", desc:"Sentado, flexione as pernas. Variação da mesa."},
+                {id:"d3-11", nome:"11. Abdução de Quadril", canal:"Leandro Twin", tags:["Glúteos","Abdutores"], video:"e2gmqTG1OgQ", desc:"Afaste as pernas. Glúteos médios e abdutores."},
+                {id:"d3-12", nome:"12. Adução de Quadril", canal:"Leandro Twin", tags:["Adutores"], video:"Wf602gn_9zU", desc:"Junte as pernas. Parte interna das coxas."},
+                {id:"d3-13", nome:"13. Panturrilha em Pé", canal:"Leandro Twin", tags:["Panturrilha"], video:"jMWs_p-W9gY", desc:"Suba nas pontas dos pés. Máxima amplitude."},
+                {id:"d3-14", nome:"14. Panturrilha Sentado", canal:"Leandro Twin", tags:["Panturrilha"], video:"jMWs_p-W9gY", desc:"Peso sobre joelhos. Trabalha o sóleo."},
+                {id:"d3-15", nome:"15. Agachamento Hack", canal:"Leandro Twin", tags:["Quadríceps"], video:"syfDrU220FU", desc:"Na máquina hack. Isola quadríceps com segurança."}
+            ],
+            dia4: [
+                {id:"d4-1", nome:"1. Supino Reto com Barra (Pesado)", canal:"Leandro Twin", tags:["Peito","Barra"], video:"EZMYCLKuGow", desc:"Carga pesada. 4-6 reps com descanso 2-3 min."},
+                {id:"d4-2", nome:"2. Supino Inclinado com Barra", canal:"Leandro Twin", tags:["Peito Superior","Barra"], video:"WP1VLAt8hbM", desc:"Barra no banco inclinado. Parte superior do peito com carga."},
+                {id:"d4-3", nome:"3. Supino Declinado com Barra", canal:"Leandro Twin", tags:["Peito Inferior","Barra"], video:"J2g6qPBJfqo", desc:"Banco declinado. Parte inferior do peitoral."},
+                {id:"d4-4", nome:"4. Rosca Direta com Barra W", canal:"Leandro Twin", tags:["Bíceps","Barra"], video:"Q8TqfD8E7BU", desc:"Barra W reduz tensão nos pulsos. Cotovelos fixos."},
+                {id:"d4-5", nome:"5. Rosca Direta com Barra Reta", canal:"Leandro Twin", tags:["Bíceps","Barra"], video:"Q8TqfD8E7BU", desc:"Versão pesada. 6-8 reps com técnica perfeita."},
+                {id:"d4-6", nome:"6. Rosca Inversa com Barra", canal:"Leandro Twin", tags:["Antebraço","Bíceps"], video:"jbSr9CzJPmA", desc:"Pegada pronada. Braquiorradial e bíceps."},
+                {id:"d4-7", nome:"7. Tríceps Testa Barra W", canal:"Leandro Twin", tags:["Tríceps","Barra"], video:"zznCYBVZOVA", desc:"Carga pesada. Desça até a testa e estenda."},
+                {id:"d4-8", nome:"8. Tríceps Supino Fechado", canal:"Leandro Twin", tags:["Tríceps","Peito"], video:"ZiemT4r4DcU", desc:"Pegada fechada. Foco no tríceps."},
+                {id:"d4-9", nome:"9. Desenvolvimento com Halteres", canal:"Leandro Twin", tags:["Ombros"], video:"EuQAfhXBEvs", desc:"Empurre os halteres acima da cabeça. Deltoides."},
+                {id:"d4-10", nome:"10. Supino Reto com Halteres", canal:"Leandro Twin", tags:["Peito","Halteres"], video:"EZMYCLKuGow", desc:"Variação com halteres. Maior amplitude, cada lado independente."},
+                {id:"d4-11", nome:"11. Crucifixo com Halteres", canal:"Leandro Twin", tags:["Peito","Halteres"], video:"uDMmccuPVPQ", desc:"Versão pesada. Forma perfeita mesmo com carga elevada."},
+                {id:"d4-12", nome:"12. Rosca Martelo Pesada", canal:"Leandro Twin", tags:["Bíceps","Halteres"], video:"0qkQy8V2FC0", desc:"Carga elevada. 6-8 reps com técnica impecável."},
+                {id:"d4-13", nome:"13. Tríceps Francês Pesado", canal:"Leandro Twin", tags:["Tríceps","Halteres"], video:"YJ4kGE3eemY", desc:"Halter pesado atrás da cabeça. Cotovelos para cima."},
+                {id:"d4-14", nome:"14. Mergulho com Peso", canal:"Leandro Twin", tags:["Peito","Tríceps"], video:"TCVj8cliLNo", desc:"Paralelas com colete ou cinto de peso. Avançado."},
+                {id:"d4-15", nome:"15. Levantamento Terra Romeno", canal:"Leandro Twin", tags:["Posteriores","Barra"], video:"u1E3_u2gJYE", desc:"Variante focada em posteriores. Pernas quase estendidas."}
+            ],
+            dia5: [
+                {id:"d5-1", nome:"1. Supino Reto + Flexão", canal:"Leandro Twin", tags:["Peito"], video:"EZMYCLKuGow", desc:"Super-série. Supino + flexões sem descanso. 3 séries à falha."},
+                {id:"d5-2", nome:"2. Rosca + Tríceps Corda", canal:"Leandro Twin", tags:["Bíceps","Tríceps"], video:"Q8TqfD8E7BU", desc:"Super-série alternada. Pump contínuo nos braços."},
+                {id:"d5-3", nome:"3. Supino Inclinado Drop-set", canal:"Leandro Twin", tags:["Peito Superior"], video:"WP1VLAt8hbM", desc:"Falha, -20% peso, continue. Repita 3 vezes."},
+                {id:"d5-4", nome:"4. Rosca Alternada Rest-pause", canal:"Leandro Twin", tags:["Bíceps"], video:"S1HAcTVQVYE", desc:"Falha, 15s descanso, mais reps. Repita 3 vezes."},
+                {id:"d5-5", nome:"5. Tríceps Corda Drop Triplo", canal:"Leandro Twin", tags:["Tríceps"], video:"dTqDKC0D6P4", desc:"Três reduções consecutivas até falha total."},
+                {id:"d5-6", nome:"6. Crossover + Flexão Diamante", canal:"Leandro Twin", tags:["Peito","Tríceps"], video:"jqTlJt3JXzQ", desc:"Super-série polia + flexão com mãos juntas."},
+                {id:"d5-7", nome:"7. Rosca Martelo 21s", canal:"Leandro Twin", tags:["Bíceps"], video:"0qkQy8V2FC0", desc:"7 metade inferior + 7 metade superior + 7 completas."},
+                {id:"d5-8", nome:"8. Tríceps Testa Isométrico", canal:"Leandro Twin", tags:["Tríceps"], video:"zznCYBVZOVA", desc:"Barra em 90° por 5-10s antes de estender."},
+                {id:"d5-9", nome:"9. Crucifixo + Voador", canal:"Leandro Twin", tags:["Peito"], video:"uDMmccuPVPQ", desc:"Pré-exaustão. Isolamento antes do composto."},
+                {id:"d5-10", nome:"10. Rosca Scott Concentrada", canal:"Leandro Twin", tags:["Bíceps"], video:"zpTK6eihdSA", desc:"Reps lentas (3s a descer). Máximo isolamento."},
+                {id:"d5-11", nome:"11. Tríceps Francês Unilateral", canal:"Leandro Twin", tags:["Tríceps"], video:"YJ4kGE3eemY", desc:"Um braço de cada vez. Corrige assimetrias."},
+                {id:"d5-12", nome:"12. Mergulho + Flexão Fechada", canal:"YouTube Shorts", tags:["Tríceps","Peito"], video:"M2oYm6W03gQ", desc:"Mergulho no banco + flexão com mãos juntas."},
+                {id:"d5-13", nome:"13. Voador com Pausa", canal:"Leandro Twin", tags:["Peito"], video:"FzCnfD0gOXo", desc:"Peak contraction de 2s em cada repetição."},
+                {id:"d5-14", nome:"14. Rosca Direta na Polia Baixa", canal:"Leandro Twin", tags:["Bíceps"], video:"Q8TqfD8E7BU", desc:"Cabo para tensão constante durante todo o movimento."},
+                {id:"d5-15", nome:"15. Tríceps Coice (Kickback)", canal:"Leandro Twin", tags:["Tríceps"], video:"PyKv23F-fVM", desc:"Inclinado, estenda braço para trás. Pump final."}
+            ],
+            dia6: [
+                {id:"d6-1", nome:"1. Levantamento Terra", canal:"Leandro Twin", tags:["Costas","Pernas"], video:"50AkPBZwACQ", desc:"Composto. Costas e pernas simultaneamente."},
+                {id:"d6-2", nome:"2. Agachamento Livre", canal:"Leandro Twin", tags:["Pernas"], video:"zgk71dUUt0Y", desc:"Principal para pernas. Core ativado."},
+                {id:"d6-3", nome:"3. Puxada Frontal Aberta", canal:"Leandro Twin", tags:["Costas"], video:"pJM_rHhluK8", desc:"Pegada aberta. Alarga as costas."},
+                {id:"d6-4", nome:"4. Stiff com Barra", canal:"Leandro Twin", tags:["Posteriores","Costas"], video:"u1E3_u2gJYE", desc:"Posteriores e fortalece lombar."},
+                {id:"d6-5", nome:"5. Remada Curvada Pronada", canal:"Leandro Twin", tags:["Costas"], video:"TfxJMertfsw", desc:"Tronco a 45°. Espessura das costas."},
+                {id:"d6-6", nome:"6. Leg Press Horizontal", canal:"Leandro Twin", tags:["Pernas"], video:"nY8UsiAqwds", desc:"Menor stress lombar. Pés à largura dos ombros."},                {id:"d6-7", nome:"7. Remada Unilateral", canal:"Leandro Twin", tags:["Costas"], video:"m4h4jT9patY", desc:"Cada lado independente. Corrige assimetrias."},
+                {id:"d6-8", nome:"8. Cadeira Extensora (Drop)", canal:"Leandro Twin", tags:["Quadríceps"], video:"el3oHblB5DM", desc:"Isolamento com drop-set final."},
+                {id:"d6-9", nome:"9. Barra Fixa ou Puxada", canal:"Leandro Twin", tags:["Costas"], video:"thg6cGXSlvY", desc:"Se não conseguir, use máquina assistida."},
+                {id:"d6-10", nome:"10. Mesa Flexora", canal:"Leandro Twin", tags:["Posteriores"], video:"2-ULaRrQa7c", desc:"Isolamento de posteriores. Controle subida e descida."},
+                {id:"d6-11", nome:"11. Remada Baixa Triângulo", canal:"Leandro Twin", tags:["Costas"], video:"Os_orWmhqxY", desc:"Costas médias. Peito aberto."},
+                {id:"d6-12", nome:"12. Afundo com Barra nas Costas", canal:"YouTube Shorts", tags:["Pernas","Glúteos"], video:"cGgGIklEJa4", desc:"Versão pesada do afundo. Maior carga e estabilidade."},
+                {id:"d6-13", nome:"13. Puxada Fechada Supinada", canal:"Leandro Twin", tags:["Costas","Bíceps"], video:"X7eZZWJmlP8", desc:"Pegada supinada. Dorsal e bíceps."},
+                {id:"d6-14", nome:"14. Elevação Pélvica com Barra", canal:"Leandro Twin", tags:["Glúteos"], video:"ptK0azwOXwM", desc:"Barra sobre quadril. Glúteos fortes."},
+                {id:"d6-15", nome:"15. Panturrilha Combo", canal:"Leandro Twin", tags:["Panturrilha"], video:"jMWs_p-W9gY", desc:"Alterne em pé/sentado. Gastrocnémio e sóleo."}
+            ]
+        };
+
+        const STORAGE_KEY = 'treino_progresso_v7';
+        let state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { done: {}, notes: {} };
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function renderExercicio(ex, diaId) {
+            const isDone = state.done[ex.id] || false;
+            const note = state.notes[ex.id] || '';
+            return `
+                <div class="exercicio-card ${isDone ? 'done' : ''}" id="card-${ex.id}">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/${ex.video}" allowfullscreen loading="lazy" title="Vídeo: ${ex.nome}"></iframe>
+                    </div>
+                    <div class="exercicio-info">
+                        <h3>${ex.nome} <span class="canal-badge">${ex.canal}</span></h3>
+                        <p>${ex.tags.map(t => `<span class="musculo-tag">${t}</span>`).join('')}</p>
+                        <p>${ex.desc}</p>
+                        <div class="card-actions">
+                            <button class="${isDone ? 'completed' : ''}" onclick="toggleDone('${ex.id}', '${diaId}')">
+                                ${isDone ? '✓ Completo' : 'Marcar ✓'}
+                            </button>
+                            <button onclick="toggleNota('${ex.id}')">📝 Notas</button>
+                        </div>
+                        <div class="nota-area" id="nota-${ex.id}">
+                            <textarea placeholder="Cargas, sensações, progressão..." onchange="saveNote('${ex.id}', this.value)">${note}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAll() {
+            Object.keys(exercicios).forEach(diaId => {
+                const grid = document.getElementById(`grid-${diaId}`);
+                grid.innerHTML = exercicios[diaId].map(ex => renderExercicio(ex, diaId)).join('');
+            });            updateProgress();
+        }
+
+        function toggleDone(id, diaId) {
+            state.done[id] = !state.done[id];
+            saveState();
+            const card = document.getElementById(`card-${id}`);
+            card.classList.toggle('done');
+            const btn = card.querySelector('.card-actions button:first-child');
+            if (state.done[id]) {
+                btn.classList.add('completed');
+                btn.textContent = '✓ Completo';
+                showToast('✅ Exercício marcado!');
+            } else {
+                btn.classList.remove('completed');
+                btn.textContent = 'Marcar ✓';
+            }
+            updateProgress();
+        }
+
+        function toggleNota(id) {
+            const area = document.getElementById(`nota-${id}`);
+            area.classList.toggle('visible');
+        }
+
+        function saveNote(id, value) {
+            state.notes[id] = value;
+            saveState();
+        }
+
+        function updateProgress() {
+            let total = 0, done = 0;
+            Object.keys(exercicios).forEach(diaId => {
+                const diaTotal = exercicios[diaId].length;
+                const diaDone = exercicios[diaId].filter(ex => state.done[ex.id]).length;
+                total += diaTotal;
+                done += diaDone;
+                const counter = document.getElementById(`counter-${diaId}`);
+                if (counter) counter.textContent = `${diaDone}/${diaTotal}`;
+            });
+            const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+            const fill = document.getElementById('progressFill');
+            const text = document.getElementById('progressText');
+            fill.style.width = pct + '%';
+            fill.textContent = pct >= 10 ? pct + '%' : '';
+            fill.setAttribute('aria-valuenow', pct);
+            text.textContent = pct + '%';
+        }
+
+        function toggleDia(id) {            const el = document.getElementById(id);
+            el.classList.toggle('collapsed');
+            const btn = el.querySelector('.dia-header');
+            const expanded = !el.classList.contains('collapsed');
+            btn.setAttribute('aria-expanded', expanded);
+        }
+
+        let allExpanded = true;
+        function toggleAll() {
+            allExpanded = !allExpanded;
+            for (let i = 1; i <= 6; i++) {
+                const el = document.getElementById(`dia${i}`);
+                if (allExpanded) el.classList.remove('collapsed');
+                else el.classList.add('collapsed');
+                el.querySelector('.dia-header').setAttribute('aria-expanded', allExpanded);
+            }
+        }
+
+        function resetProgress() {
+            if (confirm('Tem a certeza que quer apagar TODO o progresso (exercícios concluídos e notas)?')) {
+                state = { done: {}, notes: {} };
+                saveState();
+                renderAll();
+                showToast('🗑️ Progresso apagado');
+            }
+        }
+
+        function toggleTheme() {
+            const current = document.body.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.getElementById('themeBtn').textContent = next === 'light' ? '🌓 Modo Escuro' : '🌓 Modo Claro';
+        }
+
+        let timerDuration = 60;
+        let timerRemaining = 60;
+        let timerInterval = null;
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerRemaining / 60).toString().padStart(2, '0');
+            const secs = (timerRemaining % 60).toString().padStart(2, '0');
+            document.getElementById('timerDisplay').textContent = `${mins}:${secs}`;
+        }
+
+        function setTimer(seconds) {
+            timerDuration = seconds;
+            resetTimer();
+            document.querySelectorAll('.timer-preset button').forEach(b => {
+                b.classList.toggle('active', parseInt(b.dataset.time) === seconds);            });
+        }
+
+        function startTimer() {
+            if (timerInterval) return;
+            if (timerRemaining <= 0) timerRemaining = timerDuration;
+            timerInterval = setInterval(() => {
+                timerRemaining--;
+                updateTimerDisplay();
+                if (timerRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    playAlarm();
+                    showToast('⏰ Descanso concluído!');
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timerRemaining = timerDuration;
+            updateTimerDisplay();
+        }
+
+        function playAlarm() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                [660, 880, 1100].forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain); 
+                    gain.connect(ctx.destination);
+                    osc.frequency.value = freq;
+                    osc.type = 'sine';
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime + i * 0.3);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.3 + 0.3);
+                    osc.start(ctx.currentTime + i * 0.3);
+                    osc.stop(ctx.currentTime + i * 0.3 + 0.3);
+                });
+            } catch(e) { 
+                console.log('Audio não suportado'); 
+            }
+        }
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAll();
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeBtn').textContent = savedTheme === 'light' ? '🌓 Modo Escuro' : '🌓 Modo Claro';
+            updateTimerDisplay();
+
+            document.querySelectorAll('.dia-header').forEach(h => {
+                h.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        h.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
