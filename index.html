@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plano de Treino de Musculação - 7 Dias</title>
+    <title>Plano de Treino de Musculação - 8 Dias</title>
     <style>
         :root {
             --bg-primary: #1a1a2e;
@@ -47,7 +47,9 @@
 
         header {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-            padding: 30px;            text-align: center;            box-shadow: 0 4px 15px var(--shadow);
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow);
         }
         header h1 { font-size: 2.5em; margin-bottom: 10px; color: #fff; }
         header p { font-size: 1.2em; opacity: 0.9; color: #fff; }
@@ -95,8 +97,10 @@
             background: var(--bg-card);
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 20px;            border: 1px solid var(--border);
-        }        .progress-bar-container h3 { margin-bottom: 10px; }
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        .progress-bar-container h3 { margin-bottom: 10px; }
         .progress-track {
             background: rgba(255,255,255,0.1);
             height: 24px;
@@ -143,9 +147,11 @@
             cursor: pointer;
             font-size: 1em;
             transition: background 0.2s;
-        }        .timer-buttons button:hover { background: rgba(255,255,255,0.3); }
+        }
+        .timer-buttons button:hover { background: rgba(255,255,255,0.3); }
         .timer-buttons button.primary { background: var(--success); }
-        .timer-buttons button.primary:hover { background: #2ecc71; }        .timer-preset { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
+        .timer-buttons button.primary:hover { background: #2ecc71; }
+        .timer-preset { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
         .timer-preset button {
             background: rgba(255,255,255,0.1);
             color: white;
@@ -191,16 +197,19 @@
         .dia-header .counter {
             font-size: 0.55em;
             background: var(--success);
-            padding: 5px 15px;            border-radius: 20px;
+            padding: 5px 15px;
+            border-radius: 20px;
             color: white;
             font-weight: bold;
-        }        .dia1 .dia-header { background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); }
+        }
+        .dia1 .dia-header { background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); }
         .dia2 .dia-header { background: linear-gradient(135deg, #0f3460 0%, #1a6b8a 100%); }
         .dia3 .dia-header { background: linear-gradient(135deg, #533483 0%, #7b52a0 100%); }
         .dia4 .dia-header { background: linear-gradient(135deg, #e94560 0%, #f39c12 100%); }
         .dia5 .dia-header { background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); }
         .dia6 .dia-header { background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%); }
         .dia7 .dia-header { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); }
+        .dia8 .dia-header { background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%); }
 
         .exercicios-grid {
             display: grid;
@@ -243,7 +252,8 @@
         .video-container {
             position: relative;
             height: 0;
-            overflow: hidden;            background: #000;
+            overflow: hidden;
+            background: #000;
         }
         .video-container.landscape {
             padding-bottom: 56.25%;
@@ -292,7 +302,8 @@
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            padding: 20px;            animation: fadeIn 0.2s ease;
+            padding: 20px;
+            animation: fadeIn 0.2s ease;
         }
         .video-modal.active { display: flex; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -341,7 +352,8 @@
         }
         .video-modal-close {
             position: absolute;
-            top: 15px;            right: 15px;
+            top: 15px;
+            right: 15px;
             background: rgba(255,255,255,0.2);
             color: white;
             border: none;
@@ -390,14 +402,16 @@
             display: flex;
             gap: 8px;
             margin-top: 12px;
-            flex-wrap: wrap;        }
+            flex-wrap: wrap;
+        }
         .card-actions button {
             flex: 1;
             background: rgba(255,255,255,0.1);
             color: var(--text-primary);
             border: 1px solid var(--border);
             padding: 8px;
-            border-radius: 6px;            cursor: pointer;
+            border-radius: 6px;
+            cursor: pointer;
             font-size: 0.85em;
             transition: all 0.2s;
         }
@@ -439,13 +453,15 @@
 
         .instrucoes {
             background: var(--success-light);
-            border: 1px solid var(--success);            border-radius: 10px;
+            border: 1px solid var(--success);
+            border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
         }
         .instrucoes h3 { color: var(--success); margin-bottom: 10px; }
         .instrucoes ul { list-style: none; padding: 0; }
-        .instrucoes li { padding: 5px 0 5px 25px; position: relative; color: var(--text-secondary); }        .instrucoes li:before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: bold; }
+        .instrucoes li { padding: 5px 0 5px 25px; position: relative; color: var(--text-secondary); }
+        .instrucoes li:before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: bold; }
 
         .canal-badge {
             display: inline-block;
@@ -488,7 +504,8 @@
             .collapsed .exercicios-grid { display: block !important; }
         }
 
-        .toast {            position: fixed;
+        .toast {
+            position: fixed;
             bottom: 20px;
             right: 20px;
             background: var(--success);
@@ -496,7 +513,8 @@
             padding: 12px 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transform: translateX(400px);            transition: transform 0.3s;
+            transform: translateX(400px);
+            transition: transform 0.3s;
             z-index: 1000;
             max-width: calc(100% - 40px);
         }
@@ -506,7 +524,7 @@
 <body>
     <header>
         <h1>💪 Plano de Treino de Musculação</h1>
-        <p>7 Dias | 120 min/sessão | Vídeos Oficiais | Progresso Salvo</p>
+        <p>8 Dias | 120 min/sessão | Vídeos Oficiais | Progresso Salvo</p>
     </header>
 
     <div class="toolbar">
@@ -519,7 +537,7 @@
     <div class="container">
 
         <div class="status-banner" id="statusBanner">
-            ✅ Todos os 106 vídeos verificados e a funcionar
+            ✅ Plano com 119 exercícios em 8 dias
         </div>
 
         <div class="timer-container" role="region" aria-label="Cronómetro de descanso">
@@ -537,14 +555,16 @@
             </div>
         </div>
 
-        <div class="progress-bar-container">            <h3>📊 Progresso Geral: <span id="progressText">0%</span></h3>
+        <div class="progress-bar-container">
+            <h3>📊 Progresso Geral: <span id="progressText">0%</span></h3>
             <div class="progress-track">
                 <div class="progress-fill" id="progressFill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
 
         <div class="instrucoes">
-            <h3>📋 Instruções Gerais</h3>            <ul>
+            <h3>📋 Instruções Gerais</h3>
+            <ul>
                 <li>Marque ✓ em cada exercício concluído (o progresso é guardado automaticamente)</li>
                 <li>Use o cronómetro de descanso entre séries (60-90s)</li>
                 <li>Anote cargas e sensações em "Notas" em cada exercício</li>
@@ -586,13 +606,15 @@
                     <span class="badge">15 Exercícios</span>
                     <span class="counter" id="counter-dia3">0/15</span>
                     <span class="toggle-icon">▼</span>
-                </h2>            </div>
+                </h2>
+            </div>
             <div class="duracao-info">⏱️ Duração máx: 120 min | 3-4 séries de 8-15 reps</div>
             <div class="exercicios-grid" id="grid-dia3"></div>
         </div>
 
         <div class="dia-treino dia4" id="dia4">
-            <div class="dia-header" onclick="toggleDia('dia4')" tabindex="0" role="button" aria-expanded="true">                <h2>
+            <div class="dia-header" onclick="toggleDia('dia4')" tabindex="0" role="button" aria-expanded="true">
+                <h2>
                     <span>Dia 4 - Barra & Pesos</span>
                     <span class="badge">15 Exercícios</span>
                     <span class="counter" id="counter-dia4">0/15</span>
@@ -635,10 +657,24 @@
                     <span>Dia 7 - Ombros & Core</span>
                     <span class="badge">14 Exercícios</span>
                     <span class="counter" id="counter-dia7">0/14</span>
-                    <span class="toggle-icon">▼</span>                </h2>
+                    <span class="toggle-icon">▼</span>
+                </h2>
             </div>
             <div class="duracao-info">⏱️ Duração máx: 120 min | Ombros: 3x10-15 | Core: 3x15-20 | Alongamento: 10 min</div>
             <div class="exercicios-grid" id="grid-dia7"></div>
+        </div>
+
+        <div class="dia-treino dia8" id="dia8">
+            <div class="dia-header" onclick="toggleDia('dia8')" tabindex="0" role="button" aria-expanded="true">
+                <h2>
+                    <span>Dia 8 - Treino Extra</span>
+                    <span class="badge">12 Exercícios</span>
+                    <span class="counter" id="counter-dia8">0/12</span>
+                    <span class="toggle-icon">▼</span>
+                </h2>
+            </div>
+            <div class="duracao-info">⏱️ Duração máx: 120 min | Siga a ordem dos vídeos</div>
+            <div class="exercicios-grid" id="grid-dia8"></div>
         </div>
 
         <div class="instrucoes">
@@ -653,7 +689,8 @@
         </div>
 
         <footer>
-            <p>💪 Plano de Treino de Musculação | 7 Dias</p>            <p>Consulte sempre um profissional de educação física antes de iniciar.</p>
+            <p>💪 Plano de Treino de Musculação | 8 Dias</p>
+            <p>Consulte sempre um profissional de educação física antes de iniciar.</p>
         </footer>
     </div>
 
@@ -737,7 +774,8 @@
                 {id:"d4-10", nome:"10. Supino Reto com Halteres", canal:"Leandro Twin", tags:["Peito","Halteres"], video:"EZMYCLKuGow", desc:"Variação com halteres. Maior amplitude, cada lado independente."},
                 {id:"d4-11", nome:"11. Crucifixo com Halteres", canal:"Leandro Twin", tags:["Peito","Halteres"], video:"uDMmccuPVPQ", desc:"Versão pesada. Forma perfeita mesmo com carga elevada."},
                 {id:"d4-12", nome:"12. Rosca Martelo Pesada", canal:"Leandro Twin", tags:["Bíceps","Halteres"], video:"0qkQy8V2FC0", desc:"Carga elevada. 6-8 reps com técnica impecável."},
-                {id:"d4-13", nome:"13. Tríceps Francês Pesado", canal:"Leandro Twin", tags:["Tríceps","Halteres"], video:"YJ4kGE3eemY", desc:"Halter pesado atrás da cabeça. Cotovelos para cima."},                {id:"d4-14", nome:"14. Mergulho com Peso", canal:"Leandro Twin", tags:["Peito","Tríceps"], video:"TCVj8cliLNo", desc:"Paralelas com colete ou cinto de peso. Avançado."},
+                {id:"d4-13", nome:"13. Tríceps Francês Pesado", canal:"Leandro Twin", tags:["Tríceps","Halteres"], video:"YJ4kGE3eemY", desc:"Halter pesado atrás da cabeça. Cotovelos para cima."},
+                {id:"d4-14", nome:"14. Mergulho com Peso", canal:"Leandro Twin", tags:["Peito","Tríceps"], video:"TCVj8cliLNo", desc:"Paralelas com colete ou cinto de peso. Avançado."},
                 {id:"d4-15", nome:"15. Levantamento Terra Romeno", canal:"Leandro Twin", tags:["Posteriores","Barra"], video:"u1E3_u2gJYE", desc:"Variante focada em posteriores. Pernas quase estendidas."}
             ],
             dia5: [
@@ -786,8 +824,23 @@
                 {id:"d7-10", nome:"9. Burpees", canal:"YouTube Shorts", tags:["Cardio","Full Body"], video:"EiIWIEaIZe0", desc:"Exercício explosivo. 3 séries de 10-15 reps.", shorts:true},
                 {id:"d7-11", nome:"10. Mountain Climbers", canal:"YouTube Shorts", tags:["Cardio","Core"], video:"Fb79R7IUwYE", desc:"Posição de prancha, alterne joelhos ao peito. Rápido e controlado.", shorts:true},
                 {id:"d7-12", nome:"11. Prancha Abdominal (60s)", canal:"Leandro Twin", tags:["Core","Abdominais"], video:"qNRqGqESAWU", desc:"Isometria. Corpo reto, contraia abdómen e glúteos."},
-                {id:"d7-13", nome:"12. Russian Twist", canal:"YouTube Shorts", tags:["Oblíquos","Core"], video:"-cPtvFdT8dc", desc:"Sentado, rode o tronco de lado a lado. Pode segurar peso.", shorts:true},                {id:"d7-14", nome:"13. Prancha Lateral (cada lado 30s)", canal:"YouTube Shorts", tags:["Oblíquos","Core"], video:"XLKqUOMk7-w", desc:"Fortalece oblíquos e estabilizadores. Mantenha quadril elevado.", shorts:true},
+                {id:"d7-13", nome:"12. Russian Twist", canal:"YouTube Shorts", tags:["Oblíquos","Core"], video:"-cPtvFdT8dc", desc:"Sentado, rode o tronco de lado a lado. Pode segurar peso.", shorts:true},
+                {id:"d7-14", nome:"13. Prancha Lateral (cada lado 30s)", canal:"YouTube Shorts", tags:["Oblíquos","Core"], video:"XLKqUOMk7-w", desc:"Fortalece oblíquos e estabilizadores. Mantenha quadril elevado.", shorts:true},
                 {id:"d7-15", nome:"14. Alongamento Geral (10 min)", canal:"YouTube Shorts", tags:["Recuperação","Flexibilidade"], video:"jtCHPjiFLhE", desc:"Finalize com alongamento de todos os grupos musculares. Essencial.", shorts:true}
+            ],
+            dia8: [
+                {id:"d8-1", nome:"1. Exercício 1", canal:"Personalizado", tags:["Dia 8"], video:"_nvKL1AzVrM", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-2", nome:"2. Exercício 2", canal:"Personalizado", tags:["Dia 8"], video:"2S_9dQylItg", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-3", nome:"3. Exercício 3", canal:"Personalizado", tags:["Dia 8"], video:"_nvKL1AzVrM", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-4", nome:"4. Exercício 4", canal:"Personalizado", tags:["Dia 8"], video:"w86EalEoFRY", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-5", nome:"5. Exercício 5", canal:"Personalizado", tags:["Dia 8"], video:"KvJU6o50lLM", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-6", nome:"6. Exercício 6", canal:"Personalizado", tags:["Dia 8"], video:"OZacbTRI-Lw", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-7", nome:"7. Exercício 7", canal:"Personalizado", tags:["Dia 8"], video:"huB9VTclj_g", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-8", nome:"8. Exercício 8", canal:"Personalizado", tags:["Dia 8"], video:"IVNaDbgiyW4", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-9", nome:"9. Exercício 9", canal:"Personalizado", tags:["Dia 8"], video:"YlISf4U52t0", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-10", nome:"10. Exercício 10", canal:"Personalizado", tags:["Dia 8"], video:"QJRoPJ2pMlk", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-11", nome:"11. Exercício 11", canal:"Personalizado", tags:["Dia 8"], video:"AT7GUa6l9fQ", desc:"Siga o vídeo com técnica controlada."},
+                {id:"d8-12", nome:"12. Exercício 12", canal:"Personalizado", tags:["Dia 8"], video:"2GOdwHr-Kxs", desc:"Siga o vídeo com técnica controlada."}
             ]
         };
 
@@ -835,7 +888,8 @@
         }
 
         function openVideoModal(videoId, title, isShorts) {
-            const modal = document.getElementById('videoModal');            const frame = document.getElementById('modalFrame');
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('modalFrame');
             const titleEl = document.getElementById('modalTitle');
             frame.className = 'video-modal-frame ' + (isShorts ? 'portrait' : 'landscape');
             titleEl.textContent = title;
@@ -884,7 +938,8 @@
             updateProgress();
         }
 
-        function toggleNota(id) {            const area = document.getElementById(`nota-${id}`);
+        function toggleNota(id) {
+            const area = document.getElementById(`nota-${id}`);
             area.classList.toggle('visible');
         }
 
@@ -923,7 +978,7 @@
         let allExpanded = true;
         function toggleAll() {
             allExpanded = !allExpanded;
-            for (let i = 1; i <= 7; i++) {
+            for (let i = 1; i <= 8; i++) {
                 const el = document.getElementById(`dia${i}`);
                 if (allExpanded) el.classList.remove('collapsed');
                 else el.classList.add('collapsed');
@@ -933,7 +988,8 @@
 
         function resetProgress() {
             if (confirm('Tem a certeza que quer apagar TODO o progresso (exercícios concluídos e notas)?')) {
-                state = { done: {}, notes: {} };                saveState();
+                state = { done: {}, notes: {} };
+                saveState();
                 renderAll();
                 showToast('🗑️ Progresso apagado');
             }
@@ -982,7 +1038,8 @@
 
         function pauseTimer() {
             if (timerInterval) {
-                clearInterval(timerInterval);                timerInterval = null;
+                clearInterval(timerInterval);
+                timerInterval = null;
             }
         }
 
@@ -998,7 +1055,7 @@
                 [660, 880, 1100].forEach((freq, i) => {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
-                    osc.connect(gain); 
+                    osc.connect(gain);
                     gain.connect(ctx.destination);
                     osc.frequency.value = freq;
                     osc.type = 'sine';
@@ -1007,10 +1064,11 @@
                     osc.start(ctx.currentTime + i * 0.3);
                     osc.stop(ctx.currentTime + i * 0.3 + 0.3);
                 });
-            } catch(e) { 
-                console.log('Audio não suportado'); 
+            } catch(e) {
+                console.log('Audio não suportado');
             }
         }
+
         function showToast(msg) {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
@@ -1031,7 +1089,8 @@
                         e.preventDefault();
                         h.click();
                     }
-                });            });
+                });
+            });
         });
     </script>
 </body>
